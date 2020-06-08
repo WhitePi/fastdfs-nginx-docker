@@ -1,0 +1,39 @@
+version: '3'
+services:
+  tracker:
+    container_name: fastdfs-tracker
+    image: xutj/fastdfs-tracker-nginx
+    network_mode: host
+    environment:
+    #  - PORT=22122
+    #  - NGINX_START=true
+    #ports:
+    #  - "22122:22122"
+    #  - "8000:8000"
+    volumes:
+      - ./tracker/data:/var/fdfs
+      #- ./storage/config/tracker.conf:/etc/fdfs/tracker.conf
+      #- ./tracker/nginx_conf/nginx.conf:/usr/local/nginx/conf/nginx.conf
+    restart: always
+  storage:
+    container_name: fastdfs-storage
+    image: hw/fastdfs-storage-nginx
+    network_mode: host
+    environment:
+      - TRACKER_SERVER=YOUR_TRACKER_SERVER
+      #- TRACKER_SERVER=192.168.0.219
+      #- GROUP_NAME=group1
+      #- PORT=23000
+      #- NGINX_START=true
+    #ports:
+    #  - "8888:8888"
+    #  - "23000:23000"
+    volumes:
+      - ./storage/data:/var/fdfs
+      #- ./storage/config/storage.conf:/etc/fdfs/storage.conf
+      #- ./storage/config/mod_fastdfs.conf:/etc/fdfs/mod_fastdfs.conf
+      #- ./storage/config/http.conf:/etc/fdfs/http.conf
+      #- ./storage/nginx_conf/nginx.conf:/usr/local/nginx/conf/nginx.conf
+    depends_on:
+      - tracker
+    restart: always
