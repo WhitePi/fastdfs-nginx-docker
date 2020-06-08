@@ -1,5 +1,5 @@
 # Docker for fastdfs
-基于
+base on
 
 [fastdfs](https://github.com/happyfish100/fastdfs)
 
