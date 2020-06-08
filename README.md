@@ -19,8 +19,8 @@ tracker默认关闭nginx，如需启动nginx进行负载均衡等，可通过- N
 ## docker run
 
 ```
-docker run -dit --net=host --name tracker -v /var/fastdfs/tracker:/var/fdfs xutj/fastdfs-tracker-nginx fastdfs-tracker
-docker run -dit --net=host --name storage -e TRACKER_SERVER=tracker:22122 -v /var/fastdfs/storage:/var/fdfs xutj/fastdfs-tracker-nginx fastdfs-storage
+docker run -dit --net=host --name fastdfs-tracker -v /var/fastdfs/tracker:/var/fdfs xutj/fastdfs-tracker-nginx
+docker run -dit --net=host --name fastdfs-storage -e TRACKER_SERVER=tracker:22122 -v /var/fastdfs/storage:/var/fdfs xutj/fastdfs-tracker-nginx
 ```
 
 ## docker compose
