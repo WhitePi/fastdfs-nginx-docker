@@ -3,35 +3,11 @@
 
 NGINX_START=${NGINX_START:-false}
 
-#GROUP_NAME=${GROUP_NAME:-group1}
-#if [ -n "$GET_TRACKER_SERVER" ]; then
-#    export TRACKER_SERVER=$(eval $GET_TRACKER_SERVER)
-#fi
-
 function fdfs_set () {
-#    if [ "$1" = "monitor" ] ; then
-#        if [ -n "$TRACKER_SERVER" ] ; then  
-#          sed -i "s|tracker_server=.*$|tracker_server=${TRACKER_SERVER}|g" /etc/fdfs/client.conf
-#        fi
-#        fdfs_monitor /etc/fdfs/client.conf
-#        exit 0
-#    elif [ "$1" = "storage" ] ; then
-#        FASTDFS_MODE="storage"
-#    else 
-#        FASTDFS_MODE="tracker"
-#    fi
     
     if [ -n "$PORT" ] ; then  
-        sed -i "s|^port=.*$|port=${PORT}|g" /etc/fdfs/tracker.conf
+        sed -i "s|^port\s*=.*$|port = ${PORT}|g" /etc/fdfs/tracker.conf
     fi
-    
-#    if [ -n "$TRACKER_SERVER" ] ; then  
-#        sed -i "s|tracker_server=.*$|tracker_server=${TRACKER_SERVER}|g" /etc/fdfs/storage.conf
-#        sed -i "s|tracker_server=.*$|tracker_server=${TRACKER_SERVER}|g" /etc/fdfs/client.conf
-#        sed -i "s|tracker_server=.*$|tracker_server=${TRACKER_SERVER}|g" /etc/fdfs/mod_fastdfs.conf
-#    fi
-    
-#    sed -i "s|group_name=.*$|group_name=${GROUP_NAME}|g" /etc/fdfs/storage.conf
     
     FASTDFS_LOG_FILE="${FASTDFS_BASE_PATH}/logs/trackerd.log"
     PID_NUMBER="${FASTDFS_BASE_PATH}/data/fdfs_trackerd.pid"
@@ -42,22 +18,12 @@ function fdfs_set () {
     fi
 
     echo "try to start the tracker node..."
-    #if [ -f "$FASTDFS_LOG_FILE" ]; then 
-    #    rm "$FASTDFS_LOG_FILE"
-    #fi
     # start the fastdfs node.	
     fdfs_trackerd /etc/fdfs/tracker.conf start
 }
 
 function nginx_set () {
     # start nginx.
-    #if [ "${FASTDFS_MODE}" = "storage" ]; then
-    #    cp -f /nginx_conf/conf.d/${FASTDFS_MODE}.conf /usr/local/nginx/conf/conf.d/
-    #    sed -i "s|group1|${GROUP_NAME}|g" /usr/local/nginx/conf/conf.d/${FASTDFS_MODE}.conf
-    #else
-    #    cp -f /nginx_conf/conf.d/${FASTDFS_MODE}.conf /usr/local/nginx/conf/conf.d/
-    #    sed -i "s|group1|${GROUP_NAME}|g" /usr/local/nginx/conf/conf.d/${FASTDFS_MODE}.conf
-    #fi
     
     if [ "${NGINX_START}" = "false" ] || [ "${NGINX_START}" = "FALSE" ] ; then
         echo "nginx not start"

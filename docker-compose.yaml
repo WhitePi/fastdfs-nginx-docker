@@ -17,7 +17,7 @@ services:
     restart: always
   storage:
     container_name: fastdfs-storage
-    image: hw/fastdfs-storage-nginx
+    image: xutj/fastdfs-storage-nginx
     network_mode: host
     environment:
       - TRACKER_SERVER=YOUR_TRACKER_SERVER
