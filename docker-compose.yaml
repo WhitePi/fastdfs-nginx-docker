@@ -21,7 +21,7 @@ services:
     network_mode: host
     environment:
       - TRACKER_SERVER=YOUR_TRACKER_SERVER
-      #- TRACKER_SERVER=192.168.0.219
+      #- TRACKER_SERVER=192.168.0.219:22122
       #- GROUP_NAME=group1
       #- PORT=23000
       #- NGINX_START=true
