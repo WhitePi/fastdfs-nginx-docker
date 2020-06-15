@@ -12,6 +12,7 @@ function fdfs_set () {
     
     if [ -n "$PORT" ] ; then  
         sed -i "s|^port\s*=.*$|port = ${PORT}|g" /etc/fdfs/storage.conf
+        sed -i "s|^storage_server_port\s*=.*$|storage_server_port = ${PORT}|g" /etc/fdfs/mod_fastdfs.conf
     fi
     
     if [ -n "$TRACKER_SERVER" ] ; then  
@@ -20,7 +21,9 @@ function fdfs_set () {
         sed -i "s|tracker_server\s*=.*$|tracker_server = ${TRACKER_SERVER}|g" /etc/fdfs/mod_fastdfs.conf
     fi
     
-    sed -i "s|group_name\s*=.*$|group_name = ${GROUP_NAME}|g" /etc/fdfs/storage.conf
+    sed -i "s|^group_name\s*=.*$|group_name = ${GROUP_NAME}|g" /etc/fdfs/storage.conf
+    sed -i "s|^group_name\s*=.*$|group_name = ${GROUP_NAME}|g" /etc/fdfs/mod_fastdfs.conf
+    sed -i "s|group_name|${GROUP_NAME}|g" /usr/local/nginx/conf/nginx.conf
     
     FASTDFS_LOG_FILE="${FASTDFS_BASE_PATH}/logs/storaged.log"
     PID_NUMBER="${FASTDFS_BASE_PATH}/data/fdfs_storaged.pid"
