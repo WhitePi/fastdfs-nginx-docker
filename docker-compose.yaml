@@ -4,7 +4,7 @@ services:
     container_name: fastdfs-tracker
     image: xutj/fastdfs-tracker-nginx
     network_mode: host
-    environment:
+    #environment:
     #  - PORT=22122
     #  - NGINX_START=true
     #ports:
