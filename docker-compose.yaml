@@ -12,7 +12,7 @@ services:
     #  - "8000:8000"
     volumes:
       - ./tracker/data:/var/fdfs
-      #- ./storage/config/tracker.conf:/etc/fdfs/tracker.conf
+      #- ./storage/conf/tracker.conf:/etc/fdfs/tracker.conf
       #- ./tracker/nginx_conf/nginx.conf:/usr/local/nginx/conf/nginx.conf
     restart: always
   storage:
@@ -30,9 +30,9 @@ services:
     #  - "23000:23000"
     volumes:
       - ./storage/data:/var/fdfs
-      #- ./storage/config/storage.conf:/etc/fdfs/storage.conf
-      #- ./storage/config/mod_fastdfs.conf:/etc/fdfs/mod_fastdfs.conf
-      #- ./storage/config/http.conf:/etc/fdfs/http.conf
+      #- ./storage/conf/storage.conf:/etc/fdfs/storage.conf
+      #- ./storage/conf/mod_fastdfs.conf:/etc/fdfs/mod_fastdfs.conf
+      #- ./storage/conf/http.conf:/etc/fdfs/http.conf
       #- ./storage/nginx_conf/nginx.conf:/usr/local/nginx/conf/nginx.conf
     depends_on:
       - tracker
