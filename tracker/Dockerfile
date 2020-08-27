@@ -13,6 +13,11 @@ ENV FASTDFS_PATH=/opt/fdfs \
   PORT= \
   NGINX_START=
 
+# 设置容器时间
+RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+# 设置容器时区
+RUN echo 'Asia/Shanghai' >/etc/timezone
+
 #get all the dependences and nginx
 RUN yum install -y git gcc make wget pcre pcre-devel openssl openssl-devel \
   && rm -rf /var/cache/yum/*
